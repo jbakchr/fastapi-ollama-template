@@ -8,3 +8,8 @@ class GenerateRequest(BaseModel):
 
 class GenerateResponse(BaseModel):
     response: str
+
+
+class PlaygroundRequest(BaseModel):
+    prompt: str
+    model: str | None = None

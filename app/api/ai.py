@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app.services.ollama_service import OllamaService
-from app.schemas.ai import GenerateRequest, GenerateResponse
+from app.schemas.ai import GenerateRequest, GenerateResponse, PlaygroundRequest
 from app.prompts.generate import build_generate_prompt
 from app.prompts.summarize import build_summary_prompt
 from app.prompts.classify import build_classification_prompt
@@ -72,6 +72,16 @@ def extract(request: GenerateRequest):
 
     result = ollama.generate(
         prompt=prompt,
+        model=request.model,
+    )
+
+    return GenerateResponse(response=result)
+
+
+@router.post("/playground", response_model=GenerateResponse)
+def playground(request: PlaygroundRequest):
+    result = ollama.generate(
+        prompt=request.prompt,
         model=request.model,
     )
 
