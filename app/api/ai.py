@@ -5,6 +5,7 @@ from app.schemas.ai import GenerateRequest, GenerateResponse
 from app.prompts.generate import build_generate_prompt
 from app.prompts.summarize import build_summary_prompt
 from app.prompts.classify import build_classification_prompt
+from app.prompts.extract import build_extract_prompt
 
 router = APIRouter()
 ollama = OllamaService()
@@ -46,6 +47,26 @@ def classify(request: GenerateRequest):
 - statement
 - command
 - other
+""",
+    )
+
+    result = ollama.generate(
+        prompt=prompt,
+        model=request.model,
+    )
+
+    return GenerateResponse(response=result)
+
+
+@router.post("/extract", response_model=GenerateResponse)
+def extract(request: GenerateRequest):
+    prompt = build_extract_prompt(
+        text=request.prompt,
+        fields="""
+- name
+- date
+- location
+- key_points
 """,
     )
 

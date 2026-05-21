@@ -2,7 +2,7 @@ from app.prompts.base import format_prompt
 
 
 EXTRACT_TEMPLATE = """
-Extract the following information from the text:
+Extract the following information from the text.
 
 Fields:
 {fields}
@@ -10,7 +10,7 @@ Fields:
 Text:
 {text}
 
-Return the result in a structured format.
+Return the result in a structured JSON format.
 """
 
 
