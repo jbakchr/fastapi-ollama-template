@@ -2,7 +2,7 @@
 
 A minimal FastAPI template for building AI-powered backends using Ollama.
 
-Designed for fast experimentation, reusable prompt patterns, and simple iteration.
+Designed for fast experimentation, reusable prompt patterns, and iterative development.
 
 ---
 
@@ -25,11 +25,9 @@ Designed for fast experimentation, reusable prompt patterns, and simple iteratio
 
 ```bash
 git clone <your-repo-url>
-
 cd fastapi-ollama-template
 
 pip install -r requirements.txt
-
 cp .env.example .env
 
 uvicorn app.main:app --reload
@@ -106,7 +104,7 @@ This makes prompts reusable, testable, and easy to evolve.
 
 ## 🧪 Playground Endpoint
 
-The `/ai/playground` endpoint allows direct prompt experimentation:
+The `/ai/playground` endpoint is your experimentation layer.
 
 - No templates
 - No structure
@@ -117,6 +115,24 @@ Use it to:
 - test prompts quickly
 - iterate on ideas
 - debug LLM behavior
+
+---
+
+## 🔄 Development Workflow
+
+This project follows a simple prompt evolution flow:
+
+```
+playground → logs → feedback → prompts → endpoints
+```
+
+1. Experiment in `/ai/playground`
+2. Review logs (`logs/ai_logs.jsonl`)
+3. Capture insights in `FEEDBACK.md`
+4. Refine into reusable prompt templates
+5. Expose via API endpoints
+
+See `PROMPT_EVOLUTION.md` for details.
 
 ---
 
@@ -149,7 +165,14 @@ This helps:
 - Built for experimentation and iteration
 - Prompt-first design
 - Avoid overengineering
-- Designed to evolve through real usage
+- Evolve through real usage, not assumptions
+
+---
+
+## 📚 Project Docs
+
+- `FEEDBACK.md` – prompt experiments and learnings
+- `PROMPT_EVOLUTION.md` – how prompts become templates
 
 ---
 
@@ -171,8 +194,8 @@ This repository is a GitHub template.
 ## 📌 Notes
 
 - Logs are ignored via `.gitignore`
-- Designed for local development and experimentation
-- Extend based on real needs (not upfront complexity)
+- Designed for local experimentation
+- Extend only when needed
 
 ---
 
