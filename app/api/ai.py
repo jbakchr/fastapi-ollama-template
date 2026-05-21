@@ -6,6 +6,8 @@ from app.prompts.generate import build_generate_prompt
 from app.prompts.summarize import build_summary_prompt
 from app.prompts.classify import build_classification_prompt
 from app.prompts.extract import build_extract_prompt
+from app.utils.logger import log_interaction
+
 
 router = APIRouter()
 ollama = OllamaService()
@@ -35,6 +37,14 @@ def summarize(request: GenerateRequest):
         model=request.model,
     )
 
+
+    log_interaction(
+        endpoint="/ai/summarize",
+        prompt=prompt,
+        response=result,
+    )
+
+
     return GenerateResponse(response=result)
 
 
@@ -53,6 +63,12 @@ def classify(request: GenerateRequest):
     result = ollama.generate(
         prompt=prompt,
         model=request.model,
+    )
+
+    log_interaction(
+        endpoint="/ai/classify",
+        prompt=prompt,
+        response=result,
     )
 
     return GenerateResponse(response=result)
@@ -75,6 +91,12 @@ def extract(request: GenerateRequest):
         model=request.model,
     )
 
+    log_interaction(
+        endpoint="/ai/extract",
+        prompt=prompt,
+        response=result,
+    )
+
     return GenerateResponse(response=result)
 
 
@@ -84,5 +106,12 @@ def playground(request: PlaygroundRequest):
         prompt=request.prompt,
         model=request.model,
     )
+
+    log_interaction(
+        endpoint="/ai/playground",
+        prompt=request.prompt,
+        response=result,
+    )
+
 
     return GenerateResponse(response=result)
